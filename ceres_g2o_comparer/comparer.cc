@@ -4,6 +4,7 @@
 
 #include "utils.hpp"
 #include "g2o_ba.hpp"
+#include "ceres_ba.hpp"
 
 using namespace std;
 
@@ -13,6 +14,10 @@ int main(int argc, char **argv) {
   // test g2o ba
   G2oBA g2o_ba(sim_data);
   g2o_ba.solve();
+
+  // test ceres ba
+  CeresBa ceres_ba(sim_data);
+  ceres_ba.solve();
 
   return 0;
 }

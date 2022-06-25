@@ -26,7 +26,7 @@ G2O_USE_OPTIMIZATION_LIBRARY(dense);
 
 class G2oBA {
  public:
-  G2oBA(SimulationData &sim_data) : sim_data_(sim_data) {}
+  G2oBA(const SimulationData &sim_data) : sim_data_(sim_data) {}
 
   void solve() {
     g2o::SparseOptimizer optimizer;
@@ -75,8 +75,9 @@ class G2oBA {
 
     // set project edge
     for (size_t i = 0; i < sim_data_.pose_num_; i++) {
-      std::list<size_t> &point_idxs = sim_data_.idxs_in_pose_[i];
-      std::list<std::pair<double, double>> &meas = sim_data_.meas_in_pose_[i];
+      const std::list<size_t> &point_idxs = sim_data_.idxs_in_pose_[i];
+      const std::list<std::pair<double, double>> &meas =
+          sim_data_.meas_in_pose_[i];
       auto pit = point_idxs.begin();
       auto mit = meas.begin();
       for (; pit != point_idxs.end() && mit != meas.end(); pit++, mit++) {
@@ -112,9 +113,9 @@ class G2oBA {
       int point_id = i + (int) sim_data_.pose_num_;
       g2o::VertexPointXYZ *v_p = dynamic_cast<g2o::VertexPointXYZ *>(
           optimizer.vertices().find(point_id)->second);
-      Eigen::Map<Eigen::Vector3d> p(sim_data_.points_[i]);
+      Eigen::Map<const Eigen::Vector3d> p(sim_data_.points_[i]);
       Eigen::Vector3d diff = v_p->estimate() - p;
-      error += diff.dot(diff);
+      error += sqrt(diff.dot(diff));
       valid_num++;
     }
     error /= valid_num;
@@ -125,7 +126,7 @@ class G2oBA {
     std::cout << "point error  after optimize: " << error << std::endl;
   }
 
-  SimulationData &sim_data_;
+  const SimulationData &sim_data_;
 
   G2oBA() = delete;
 };

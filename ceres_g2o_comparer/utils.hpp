@@ -185,7 +185,7 @@ class SimulationData {
     }
   }
 
-  double getNoiseError() {
+  double getNoiseError() const {
     size_t valid_num = 0;
     double error = 0.0;
     for (size_t i = 0; i < point_num_; i++) {

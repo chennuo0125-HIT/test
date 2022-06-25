@@ -14,12 +14,6 @@ include_directories(${Eigen3_INCLUDE_DIR})
 include_directories(third_party/g2o)
 include_directories(third_party/g2o/build)
 
-# add_executable(simple_bundle_adjuster simple_bundle_adjuster.cc)
-# target_link_libraries(simple_bundle_adjuster Ceres::ceres)
-
-# add_executable(ceres_ba ceres_ba.cc)
-# target_link_libraries(ceres_ba Ceres::ceres)
-
 set(G2O_LIBS 
   ${PROJECT_SOURCE_DIR}/third_party/g2o/lib/libg2o_core.so
   ${PROJECT_SOURCE_DIR}/third_party/g2o/lib/libg2o_solver_dense.so
@@ -28,9 +22,6 @@ set(G2O_LIBS
   ${PROJECT_SOURCE_DIR}/third_party/g2o/lib/libg2o_types_slam3d.so
 )
 
-add_executable(g2o_ba g2o_ba.cc)
-target_link_libraries(g2o_ba ${G2O_LIBS})
-
 add_executable(comparer comparer.cc)
-target_link_libraries(comparer ${G2O_LIBS})
+target_link_libraries(comparer ${G2O_LIBS} Ceres::ceres)
 
