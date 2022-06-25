@@ -1,0 +1,4 @@
+ceres_g2o_comparer/build/
+ceres_g2o_comparer/third_party/g2o/build/
+ceres_g2o_comparer/third_party/g2o/lib/
+ceres_g2o_comparer/third_party/g2o/config.h
