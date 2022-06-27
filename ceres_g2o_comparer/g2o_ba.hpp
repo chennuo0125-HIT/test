@@ -29,6 +29,7 @@ class G2oBA {
   G2oBA(const SimulationData &sim_data) : sim_data_(sim_data) {}
 
   void solve() {
+    std::cout << "************** solve ba by g2o ***************" << std::endl;
     g2o::SparseOptimizer optimizer;
     optimizer.setVerbose(false);
     std::string solver_name = "lm_fix6_3";
@@ -123,7 +124,9 @@ class G2oBA {
     std::cout << std::endl;
     std::cout << "point error before optimize: " << sim_data_.getNoiseError()
               << std::endl;
-    std::cout << "point error  after optimize: " << error << std::endl;
+    std::cout << "point error  after optimize: " << error << std::endl
+              << std::endl
+              << std::endl;
   }
 
   const SimulationData &sim_data_;
