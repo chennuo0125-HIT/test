@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 project(ceres_g2o_comparer)
 
 set(CMAKE_CXX_STANDARD 14)
-# set (CMAKE_BUILD_TYPE "Release")
-add_compile_options(-g)
+set (CMAKE_BUILD_TYPE "Release")
+# add_compile_options(-g)
 
 LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 
