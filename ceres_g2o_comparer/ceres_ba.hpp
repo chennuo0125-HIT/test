@@ -75,7 +75,8 @@ class ReprojectFactor : public ceres::SizedCostFunction<2, 7, 3> {
         jac_pose.block(0, 3, 2, 3) = jac_cam * (-Rcw * hat(pw));
       }
       if (jacobians[1]) {
-        Eigen::Map<Eigen::Matrix<double, 2, 3>> jac_point(jacobians[1]);
+        Eigen::Map<Eigen::Matrix<double, 2, 3, Eigen::RowMajor>> jac_point(
+            jacobians[1]);
         jac_point.setZero();
         jac_point = jac_cam * Rcw;
       }
